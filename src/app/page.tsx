@@ -2,10 +2,21 @@
 
 import Image from "next/image";
 import { ConnectButton } from "thirdweb/react";
-import thirdwebIcon from "@public/thirdweb.svg";
+import agodIcon from "@public/icon.png";
 import { client } from "./client";
+import { sepolia } from "thirdweb/chains";
+import { getContract } from "thirdweb";
+import { defineChain } from "thirdweb/chains";
 
 export default function Home() {
+
+  const contract = getContract({
+    client,
+    chain: defineChain(11155111),
+    address: "0xC655e27D77B7a921e45C603f4D0a474BdEEDb42b",
+  });
+  
+
   return (
     <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
       <div className="py-20">
@@ -13,11 +24,24 @@ export default function Home() {
 
         <div className="flex justify-center mb-20">
           <ConnectButton
+            chain={sepolia}
             client={client}
             appMetadata={{
-              name: "Example App",
-              url: "https://example.com",
+              name: "AGOD Minter",
+              url: "https://agodecosystem.com",
             }}
+            accountAbstraction={{
+              chain: sepolia,
+              sponsorGas: true,
+              }}
+            connectButton={{ 
+                label: "Conéctate para mintear" 
+              }}
+            connectModal={{ 
+              size: "wide",
+              showThirdwebBranding: false, 
+            }}
+            locale={"es_ES"}
           />
         </div>
 
@@ -31,7 +55,7 @@ function Header() {
   return (
     <header className="flex flex-col items-center mb-20 md:mb-20">
       <Image
-        src={thirdwebIcon}
+        src={agodIcon}
         alt=""
         className="size-[150px] md:size-[150px]"
         style={{
@@ -40,17 +64,17 @@ function Header() {
       />
 
       <h1 className="text-2xl md:text-6xl font-semibold md:font-bold tracking-tighter mb-6 text-zinc-100">
-        thirdweb SDK
-        <span className="text-zinc-300 inline-block mx-1"> + </span>
-        <span className="inline-block -skew-x-6 text-blue-500"> Next.js </span>
+        AGOD Token
+        <span className="text-zinc-300 inline-block mx-1"> · </span>
+        <span className="inline-block -skew-x-6 text-red-500"> Minter </span>
       </h1>
 
       <p className="text-zinc-300 text-base">
-        Read the{" "}
+        Abre la puerta al{" "}
         <code className="bg-zinc-800 text-zinc-300 px-2 rounded py-1 text-sm mx-1">
-          README.md
+          UNIVERSO
         </code>{" "}
-        file to get started.
+        Blockchain.
       </p>
     </header>
   );
@@ -60,21 +84,21 @@ function ThirdwebResources() {
   return (
     <div className="grid gap-4 lg:grid-cols-3 justify-center">
       <ArticleCard
-        title="thirdweb SDK Docs"
-        href="https://portal.thirdweb.com/typescript/v5"
-        description="thirdweb TypeScript SDK documentation"
+        title="Pandora's Foundation"
+        href="https://pandoras.foundation"
+        description="Un mundo nuevo, tokenización de RWA"
       />
 
       <ArticleCard
-        title="Components and Hooks"
-        href="https://portal.thirdweb.com/typescript/v5/react"
-        description="Learn about the thirdweb React components and hooks in thirdweb SDK"
+        title="AGOD Ecosystem"
+        href="https://agodecosystem.com"
+        description="La descripción"
       />
 
       <ArticleCard
-        title="thirdweb Dashboard"
-        href="https://thirdweb.com/dashboard"
-        description="Deploy, configure, and manage your smart contracts from the dashboard."
+        title="Harmony Ark Foundation"
+        href="https://harmonyearth.me"
+        description="La descripción."
       />
     </div>
   );
