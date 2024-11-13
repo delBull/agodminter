@@ -6,13 +6,12 @@ import agodIcon from "@public/icon.png";
 import { client } from "./client";
 import { sepolia } from "thirdweb/chains";
 import { getContract } from "thirdweb";
-import { defineChain } from "thirdweb/chains";
 
 export default function Home() {
 
   const contract = getContract({
     client,
-    chain: defineChain(11155111),
+    chain: sepolia,
     address: "0xC655e27D77B7a921e45C603f4D0a474BdEEDb42b",
   });
   
